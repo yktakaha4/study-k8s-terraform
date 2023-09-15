@@ -18,7 +18,7 @@ module "eks" {
       max_capacity     = 2
       min_capacity     = 2
 
-      instance_types = ["t3.small"]
+      instance_types = ["t4g.small"]
 
       k8s_labels = {
         Name = local.cluster_name
