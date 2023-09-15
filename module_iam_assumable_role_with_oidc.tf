@@ -1,6 +1,6 @@
 module "albc_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "3.5.0"
+  version = "5.30.0"
 
   create_role      = true
   role_name        = "aws-load-balancer-controller-${random_string.suffix.result}-albc-role"
