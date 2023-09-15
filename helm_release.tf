@@ -12,7 +12,7 @@ resource "helm_release" "albc" {
         create = true
         name   = lower("aws-load-balancer-controller-${random_string.suffix.result}-service-account")
         annotations = {
-          "eks.amazonaws.com/role-arn" = module.albc_irsa.this_iam_role_arn
+          "eks.amazonaws.com/role-arn" = module.albc_irsa.iam_role_arn
         }
       }
     }

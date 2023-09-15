@@ -4,16 +4,16 @@ module "eks" {
 
   cluster_name    = local.cluster_name
   cluster_version = "1.27"
-  subnets         = module.vpc.private_subnets
+  subnet_ids         = module.vpc.private_subnets
 
   tags = {
-    Name = local.cluster_name
+    Name = var.resource_prefix
   }
 
   vpc_id = module.vpc.vpc_id
 
-  node_groups = {
-    study-k8s = {
+  eks_managed_node_groups  = {
+    study_k8s = {
       desired_capacity = 2
       max_capacity     = 2
       min_capacity     = 2
@@ -30,6 +30,5 @@ module "eks" {
     }
   }
 
-  write_kubeconfig = false
   enable_irsa      = true
 }
