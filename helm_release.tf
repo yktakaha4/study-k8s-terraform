@@ -2,7 +2,7 @@ resource "helm_release" "albc" {
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
-  version    = "1.1.0"
+  version    = "1.6.1"
   namespace  = "kube-system"
 
   values = [yamlencode(
@@ -12,7 +12,7 @@ resource "helm_release" "albc" {
         create = true
         name   = lower("aws-load-balancer-controller-${random_string.suffix.result}-service-account")
         annotations = {
-          "eks.amazonaws.com/role-arn" = module.albc_irsa.this_iam_role_arn
+          "eks.amazonaws.com/role-arn" = module.albc_irsa.iam_role_arn
         }
       }
     }
@@ -21,9 +21,9 @@ resource "helm_release" "albc" {
 
 resource "helm_release" "metrics_server" {
   name       = "metrics-server"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "https://kubernetes-sigs.github.io/metrics-server"
   chart      = "metrics-server"
-  version    = "5.0.2"
+  version    = "3.11.0"
   namespace  = "kube-system"
 
   values = [yamlencode(
